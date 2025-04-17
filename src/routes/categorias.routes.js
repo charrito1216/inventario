@@ -6,5 +6,7 @@ const  router = Router();
 /*get */
 router.get("/",categoriaController.getCategorias); /read/ 
 router.post("/",categoriaController.postCategorias);/*create */
+router.get("/:id",categoriaController.getCategory);/*create */
+
 
 export default router;
