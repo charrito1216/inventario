@@ -1,21 +1,17 @@
-/*importamos al framework express */
-
+/Ïmportamos al framework exprres/
 import express from "express";
-import cors from  "cors"
-import categoriasRoutes from "./routers/categorias.routes.js";
+import categoriaRouter from "./routes/categorias.routes.js"
+import cors from "cors"
 
-/*Asignamos a app toda funcionalidad para mi server web */
+const app=express();
+/asignamos a pp toda la funcionalidad para mi sever web/
 
-const app = express();
+/*seterar un puerto a mi web server */
+app.set("port",5000)
+/*Midleware */
+app.use(express.json());
+app.use(cors());/*routes */
+app.use("/api/categorias",categoriaRouter);
 
-/*setear un puerto ami web server */
-app.set("port",5000);
-
-app.use(cors());
-
-/*routers */
-
-app.use("/api/categorias",categoriasRoutes)
-
-export default app;
-
+/*hacemos dispobinle a mis erver app para toda la aplicación */
+export default app;
