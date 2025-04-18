@@ -54,9 +54,28 @@ const deleteCategory= async (req, res)=>{
 
 }
 
+const updateCategorias = async(req,res) =>{
+    try {
+        const {id} = req.params
+
+        const {CategoriaNombre,Descripcion,Imagen } = req.body;
+        
+        const category = {CategoriaNombre,Descripcion,Imagen }
+
+        const conecction = await getConection();
+        
+        const result = await conecction.query("UPDATE categorias SET ? WHERE CategoriaID = ?", [category, id])
+        
+        res.json(result)
+    } catch (error) {
+        console.error("Error 500");
+    }
+}
+
 export const methodHTTP = {
     getCategorias, 
     postCategorias,
     getCategory,
-    deleteCategory 
+    deleteCategory,
+    updateCategorias 
 }
