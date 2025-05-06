@@ -1,16 +1,19 @@
-import mysql from "promise-mysql"
-import config from "./../config.js"
+import mysql from "mysql2/promise";
+import config from "./../config.js";
 
-const connection = mysql.createConnection({
-    host : config.host,
-    database : config.database,
-    user : config.user,
-    password: config.password
-})
+let connection;
 
-
-const getConnection = () =>{
-    return connection
-}
+const getConnection = async () => {
+    if (!connection) {
+        connection = await mysql.createConnection({
+            host: config.host,
+            user: config.user,
+            password: config.password,
+            database: config.database,
+        });
+        console.log("Conectado a MySQL con mysql2/promise");
+    }
+    return connection;
+};
 
 export default getConnection;
